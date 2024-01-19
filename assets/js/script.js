@@ -14,8 +14,14 @@ function createMultiplicationEquation() {
     return { equation: `${num1} x ${num2}`, product: product };
 }
 
+// Function to toggle the disabled attribute of the 'submit' button
+function toggleDisabledSubmit(isDisabled){
+    document.getElementById("submit").disabled = isDisabled;
+}
+
 // This function generates a new equation and displays it on the card
 function nextQuestion() {
+    toggleDisabledSubmit(false);
     // Generate a new multiplication equation
     result = createMultiplicationEquation();
     // Display the equation on the card
@@ -35,6 +41,7 @@ function checkAnswer() {
     if (input === result.product) {
         // If correct, show a positive feedback
         document.getElementById("feedback").innerHTML = "Correct!";
+        toggleDisabledSubmit(true);
     } else {
         // If incorrect, show a negative feedback
         document.getElementById("feedback").innerHTML = "Wrong!";
@@ -43,7 +50,10 @@ function checkAnswer() {
 
 // Generate a multiplication equation
 let result = createMultiplicationEquation();
+
 // Display the equation on the card
 document.getElementById("equation").innerHTML = result.equation;
+
 // Add an event listener to the input element
 document.getElementById("input").addEventListener("change", checkAnswer);
+
