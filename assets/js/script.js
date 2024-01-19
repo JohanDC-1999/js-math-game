@@ -14,6 +14,17 @@ function createMultiplicationEquation() {
     return { equation: `${num1} x ${num2}`, product: product };
 }
 
+// This function generates a new equation and displays it on the card
+function nextQuestion() {
+    // Generate a new multiplication equation
+    result = createMultiplicationEquation();
+    // Display the equation on the card
+    document.getElementById("equation").innerHTML = result.equation;
+    // Clear the input and feedback elements
+    document.getElementById("input").value = "";
+    document.getElementById("feedback").innerHTML = "";
+}
+
 // Check if the answer entered is correct
 function checkAnswer() {
     // Get the user's input
