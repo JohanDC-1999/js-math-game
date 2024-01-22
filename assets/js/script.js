@@ -4,6 +4,12 @@ var score = 0;
 // Declare global variable to access the answer on-demand instead of re-doing the calculation
 var answer;
 
+// Get the score number element
+var score_element = document.getElementById('score_number');
+score_element.innerHTML = 0; // Set to 0 default
+
+var assisted = false; // Need to see when someone used the show answer - if they did, score should not increase
+
 // Returns a random integer between min and max (inclusive)
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -37,6 +43,8 @@ function nextQuestion() {
     // Clear the input and feedback elements
     document.getElementById("input").value = "";
     document.getElementById("feedback").innerHTML = "";
+    // Reset assisted variable
+    assisted = false;
 }
 
 // Function to show the answer
@@ -55,6 +63,7 @@ function showAnswer() {
 // Function to show the answer
 function showAnswerSimple() {
     document.getElementById("input").value = answer;
+    assisted = true; // User used assistance and we don't want score to be updated
 }
 
 // Check if the answer entered is correct
@@ -71,8 +80,12 @@ function checkAnswer() {
         // If correct, show a positive feedback
         document.getElementById("feedback").innerHTML = "Correct!";
         toggleDisabledSubmit(true);
-        score++;
-        console.log(score);
+        // User did not use assistance so we can update the score
+        if(assisted === false){
+            score++;
+            score_element.innerHTML = score;
+        }
+        
     } else {
         // If incorrect, show a negative feedback
         document.getElementById("feedback").innerHTML = "Wrong!";
