@@ -10,10 +10,15 @@ score_element.innerHTML = 0; // Set to 0 default
 
 var assisted = false; // Need to see when someone used the show answer - if they did, score should not increase
 
+// Timer variable
+let timer;
+
 // Returns a random integer between min and max (inclusive)
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+
 
 // Creates a multiplication equation with two numbers between 1 and 12
 function createMultiplicationEquation() {
@@ -35,6 +40,7 @@ function toggleDisabledSubmit(isDisabled) {
 
 // This function generates a new equation and displays it on the card
 function nextQuestion() {
+    changeLoadingBarColor("green");
     toggleDisabledSubmit(false);
     // Generate a new multiplication equation
     result = createMultiplicationEquation();
@@ -45,6 +51,42 @@ function nextQuestion() {
     document.getElementById("feedback").innerHTML = "";
     // Reset assisted variable
     assisted = false;
+    // Start the timer
+    startTimer();
+}
+
+function changeLoadingBarColor(color){
+    let timeLeftBar = document.getElementById("time-left-bar");
+    timeLeftBar.style.backgroundColor = color;
+}
+
+// Creates a timer that lasts 10 seconds - if time runs out, go to next question
+function startTimer() {
+    let timeLeft = 10;
+    document.getElementById("time-left-text").textContent = timeLeft;
+    let timeLeftBar = document.getElementById("time-left-bar");
+    timeLeftBar.style.width = '100%'; // Start with full width
+    clearTimeout(timer);
+    timer = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 5) {
+            changeLoadingBarColor("red")
+        }
+        document.getElementById("time-left-text").textContent = timeLeft;
+        // Calculate and update progress bar width
+        let widthPercent = (timeLeft / 10) * 100;
+        timeLeftBar.style.width = widthPercent + '%';
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            nextQuestion();
+            
+        }
+    }, 1000);
+}
+
+// Stops the timer
+function stopTimer() {
+    clearTimeout(timer);
 }
 
 // Function to show the answer
@@ -77,6 +119,7 @@ function checkAnswer() {
     input = Number(input);
     // Compare it with the correct answer
     if (input === result.product) {
+        stopTimer();
         // If correct, show a positive feedback
         document.getElementById("feedback").innerHTML = "Correct!";
         toggleDisabledSubmit(true);
@@ -101,3 +144,4 @@ document.getElementById("equation").innerHTML = result.equation;
 // Add an event listener to the input element
 document.getElementById("input").addEventListener("change", checkAnswer);
 
+startTimer();
