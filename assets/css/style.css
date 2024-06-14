@@ -1,37 +1,81 @@
-.card {
-    width: 70%;
-    height: 50vh;
-    border: 2px solid black;
-    border-radius: 10px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-
-.equation {
-  font-size: 36px;
+/* General Styling */
+body {
+  font-family: 'Arial', sans-serif; /* Choose a clean font */
+  background-color: #f4f4f4; /* Soft background color */
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; 
 }
 
-.input {
-  width: 100px;
-  height: 40px;
-  font-size: 24px;
+/* Button Styling */
+.button {
+  background-color: transparent; /* No background color */
+  color: #333; /* Dark gray text */
+  border: 1px solid #ccc; /* Light gray border */
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  margin: 5px; /* Space between buttons */
+  transition: border-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.button:hover {
+  border-color: #666; /* Darker gray border on hover */
+}
+
+.card {
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 30px;
+  border-radius: 8px;
   text-align: center;
 }
-
+/* Equation */
+.equation {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+/* Input */
+.input {
+  width: 150px;
+  padding: 10px;
+  font-size: 1.2em;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+/* Feedback */
 .feedback {
-  font-size: 24px;
-  color: green;
+  font-size: 1.1em;
+  margin-bottom: 20px;
 }
-
-#score_text{
-  font-size: 20px;
+/* Score */
+#score_text {
   position: absolute;
-  top: 10px;
-  right:10px;
-  transform: translate(-10px, -10px); /* This moves the element 10px left and 10px up */
+  top: 15px;
+  right: 15px;
+  font-size: 0.9em;
+  color: #777;
 }
-  
+/* Timer */
+#timer {
+  width: 250px;
+  margin: 0 auto 20px auto; /* Center the timer */
+  border: none; /* Remove border */
+}
+#time-left-bar {
+  height: 25px;
+  background-color: #4CAF50;
+  border-radius: 4px; /* Rounded corners for the bar */
+  overflow: hidden; /* Hide excess of the bar when shrinking */
+}
+#time-left-text {
+  display: block; /* Occupy full width for better positioning */
+  text-align: center;
+  padding-top:  5px;
+  font-size: 0.9em;
+  color: black;
+}
