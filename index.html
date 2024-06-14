@@ -15,6 +15,12 @@
         <p class="equation" id="equation">Equation here...</p>
         <input class="input" id="input" type="number" placeholder="Answer here">
         <p class="feedback" id="feedback"></p>
+        <!-- <p id="timer">Time left: <span id="time-left">10</span> seconds</p> -->
+        <div id="timer">
+            <div id="time-left-bar"></div>
+            <span id="time-left-text">10</span> seconds
+        </div>
+        
         <button class="button" id="submit" onclick="checkAnswer()">Submit</button>
         <button class="button" id="next" onclick="nextQuestion()">Next</button>
         <button class="button" id="answer" onclick="showAnswerSimple()">Solution</button>
